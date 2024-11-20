@@ -9,8 +9,9 @@ module.exports = (db) => {
       SELECT DISTINCT Defect_Info.DefectID, Defect_Info.ProductID, Defect_Info.Defect_Category, Defect_Info.Defect_Qty,
                       Order_Info.Product_Name, Orders.OrderID, Orders.UserID
       FROM Defect_Info
-      JOIN Order_Info ON Defect_Info.ProductID = Order_Info.ProductID
-      JOIN Orders ON Defect_Info.DefectID = Orders.OrderID
+          JOIN Defect ON Defect_Info.DefectID = Defect.DefectID
+      JOIN Order_Info ON Defect_Info.ProductID = Order_Info.ProductID  
+      JOIN Orders ON Defect.OrderID = Orders.OrderID  
     `;
 
     db.all(query, (err, rows) => {
