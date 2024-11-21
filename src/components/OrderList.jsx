@@ -21,16 +21,23 @@ const OrderList = () => {
       setError("User ID is required for fetching orders.");
       return;
     }
-
+  
     const url = `http://localhost:3002/orders/exportCartData?userID=${userID}`;
-
+  
     try {
       const response = await fetch(url);
+      if (response.status === 404) {
+        console.log(`No orders found for userID: ${userID}`);
+        setOrders([]);
+        setError("No orders yet!");
+        return;
+      }
       if (!response.ok) {
         throw new Error("Failed to fetch orders");
       }
       const data = await response.json();
-      setOrders(data);
+      setOrders(data.length ? data : []);
+      setError(data.length ? null : "No orders yet");
     } catch (err) {
       console.error(err);
       setError("Failed to load orders");

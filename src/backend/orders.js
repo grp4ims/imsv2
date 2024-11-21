@@ -9,9 +9,9 @@ module.exports = (db) => {
       console.error("UserID is missing in the request");
       return res.status(400).send('UserID is required');
     }
-
+  
     console.log("Fetching orders for userID:", userID); 
-
+  
     const query = `
       SELECT Orders.OrderID, Orders.UserID, Orders.Order_Date, Orders.Order_Delivery_Date, Orders.Order_Cost,
              Order_Info.ProductID, Order_Info.Order_Qty, Order_Info.Product_Name, Orders.Status 
@@ -19,19 +19,18 @@ module.exports = (db) => {
       JOIN Order_Info ON Orders.OrderID = Order_Info.OrderID
       WHERE Orders.UserID = ?
     `;
-
+  
     db.all(query, [userID], (err, rows) => {
       if (err) {
         console.error("Error executing query:", err.message); 
         return res.status(500).send('Unable to retrieve order data');
       }
-
+  
       if (!rows || rows.length === 0) {
         console.log("No orders found for userID:", userID);
-        return res.status(404).send('No orders found for the user');
+        return res.status(200).json([]);
       }
-
-
+  
       const orders = rows.reduce((acc, row) => {
         const {
           OrderID,
@@ -44,7 +43,7 @@ module.exports = (db) => {
           Order_Qty,
           Product_Name
         } = row;
-
+  
         if (!acc[OrderID]) {
           acc[OrderID] = {
             OrderID,
@@ -56,20 +55,20 @@ module.exports = (db) => {
             items: [] 
           };
         }
-
+  
         acc[OrderID].items.push({
           ProductID,
           Product_Name,
           Order_Qty
         });
-
+  
         return acc;
       }, {});
-
+  
       console.log("Formatted orders response:", Object.values(orders));
       res.json(Object.values(orders));
     });
-  });
+  });  
 
 
   router.post('/exportCartData', (req, res) => {
