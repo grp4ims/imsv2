@@ -1,5 +1,4 @@
 import React from 'react'
-// Do I need a hero at the top?
 const Hero = ({title = '', subtitle = ''}) => {
     return (
         < section className="bg-indigo-700 py-20 mb-4" >

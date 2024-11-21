@@ -12,7 +12,6 @@ module.exports = (db) => {
 
         const query = 'SELECT * FROM Login WHERE email = ?';
         
-        // Fetch the user from the database
         db.get(query, [email], async (err, user) => {
             if (err) {
                 console.error("Database error:", err.message);
@@ -24,7 +23,6 @@ module.exports = (db) => {
                 return res.status(401).json({ message: 'Invalid email or password' });
             }
             
-            // Check if user.password exists before comparing
             if (!user.Password) {
                 console.error("Password field is undefined for user:", email);
                 return res.status(500).json({ error: "Password field is missing in the database record" });
@@ -32,20 +30,17 @@ module.exports = (db) => {
 
             console.log("Retrieved user details - Email:", user.Email, "Role:", user.Role, "UserID:", user.UserID);
 
-            // Compare the provided password with the hashed password in the database
             try {
-                const isPasswordValid = await bcrypt.compare(password, user.Password); // Match column name to database
+                const isPasswordValid = await bcrypt.compare(password, user.Password); 
                 
                 if (!isPasswordValid) {
                     console.log("Invalid password for user:", email);
                     return res.status(401).json({ message: 'Invalid email or password' });
                 }
 
-                // Generate a JWT token for the user
                 const token = jwt.sign({ email: user.Email, role: user.Role, id: user.UserID }, SECRET_KEY, { expiresIn: '1h' }); // **Added id to token payload**
-                console.log("Login successful for:", email); // Debug log
+                console.log("Login successful for:", email); 
                 
-                // Send the token to the client
                 res.status(200).json({
                     message: 'Login successful',
                     token, 

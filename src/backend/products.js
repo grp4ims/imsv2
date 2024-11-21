@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-// Get, add, remove, and update products
 module.exports = (db) => {
  
   router.get('/all', (req, res) => {

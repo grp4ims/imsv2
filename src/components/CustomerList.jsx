@@ -43,6 +43,7 @@ const CustomerList = ({ customer, customers, setCustomers }) => {
   };
 
   const handleUpdateSubmit = async () => {
+    window.location.reload();
     const formattedCustomer = {
       Fname: updatedCustomer.Fname,
       Lname: updatedCustomer.Lname,
@@ -67,7 +68,6 @@ const CustomerList = ({ customer, customers, setCustomers }) => {
         console.log(`Customer with ID ${UserID} updated successfully.`);
         setShowUpdateModal(false); 
         
-        // Display a success notification
         window.alert("Customer updated successfully!");
       } else {
         console.error(

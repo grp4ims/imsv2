@@ -7,7 +7,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const { setIsAuthenticated, setUserRole } = useContext(UserContext); // Ensure both functions are available
+  const { setIsAuthenticated, setUserRole } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -28,7 +28,6 @@ const Login = () => {
         console.log("Login successful, storing token:", data.token);
         localStorage.setItem("token", data.token);
 
-        // Update context values for authentication and role
         setIsAuthenticated(true);
         setUserRole(data.user.role);
         navigate("/home");

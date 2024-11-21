@@ -11,7 +11,6 @@ const login = require('./login')
 const register = require('./register')
 const customer = require('./customer')
 const reports = require('./reports')
-const customer_view = require('./customer-view')
 const orders = require('./orders')
 
 const defects = require('./defects'); 
@@ -41,7 +40,6 @@ app.use('/login',login(db))
 app.use('/register',register(db))
 app.use('/customer',customer(db))
 app.use('/reports',reports(db))
-app.use('/customer-view',customer_view(db))
 app.use('/orders', orders(db))
 
 app.use('/purchaseorders',purchaseorders(db))

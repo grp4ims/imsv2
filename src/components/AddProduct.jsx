@@ -21,10 +21,10 @@ const AddProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    window.location.reload();
 
     try {
       const response = await fetch('http://localhost:3002/products/add', {
-        // Replace with your actual backend URL
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
