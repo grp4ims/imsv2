@@ -7,7 +7,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const { setIsAuthenticated, setUserRole } = useContext(UserContext); // Ensure both functions are available
+  const { setIsAuthenticated, setUserRole } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
