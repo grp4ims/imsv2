@@ -176,11 +176,14 @@ const OrderList = () => {
               item.Product_Name.toLowerCase().includes(searchQuery.toLowerCase())
             );
             if (filteredItems.length === 0) return null;
+            const displayDeliveryDate = (order.status === "Rejected" || order.status === "Pending") 
+            ? "-" 
+            : order.Order_Delivery_Date;        
             return (
               <div key={order.OrderID} className="bg-white p-4 rounded-lg shadow-md">
                 <h3 className="text-lg font-semibold">OrderID: {order.OrderID}</h3>
                 <p>Order Date: {order.Order_Date}</p>
-                <p>Delivery Date: {order.Order_Delivery_Date}</p>
+                <p>Delivery Date: {displayDeliveryDate}</p>
                 <p>Total Cost: ${order.Order_Cost.toFixed(2)}</p>
                 <p>Status: {order.status}</p>
                 <h4 className="font-semibold mt-2">Items:</h4>
