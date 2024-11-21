@@ -3,7 +3,7 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}",
-    "!./node_modules", // Explicitly exclude node_modules
+    "!./node_modules", 
   ],
   theme: {
     extend: {

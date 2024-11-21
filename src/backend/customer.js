@@ -3,7 +3,6 @@ const router = express.Router();
 
 module.exports = (db) => {
   
-  // Get all customers
   router.get('/all', (req, res) => {
     const sql = `
       SELECT 
@@ -26,12 +25,10 @@ module.exports = (db) => {
     });
   });
 
-  // Update a customer
   router.put('/update/:userID', (req, res) => {
     const { userID } = req.params;
     const { Fname, Lname, Email, Contact, Company_Name } = req.body;
 
-    // Update the Login table with user information
     const updateLoginSql = `
       UPDATE Login 
       SET Fname = ?, Lname = ?, Email = ?, Contact = ?
@@ -45,7 +42,6 @@ module.exports = (db) => {
         return;
       }
 
-      // Update the Customer table with customer-specific information
       const updateCustomerSql = `
         UPDATE Customer 
         SET Company_Name = ? 
@@ -64,7 +60,6 @@ module.exports = (db) => {
     });
   });
 
-  // Delete a customer
   router.delete('/delete/:userID', (req, res) => {
     const { userID } = req.params;
 

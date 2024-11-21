@@ -1,6 +1,5 @@
 import React from 'react';
 
-//add customer via form into the DB - yet to connect post request to DB
 const AddCustomerPage = () => {
   return (
     <section className="bg-indigo-50">

@@ -28,7 +28,6 @@ const Login = () => {
         console.log("Login successful, storing token:", data.token);
         localStorage.setItem("token", data.token);
 
-        // Update context values for authentication and role
         setIsAuthenticated(true);
         setUserRole(data.user.role);
         navigate("/home");

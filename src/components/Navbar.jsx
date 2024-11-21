@@ -72,9 +72,6 @@ const Navbar = () => {
                     <NavLink to="/products" className={linkClass}>
                       Products
                     </NavLink>
-                    <NavLink to="/defectreports" className={linkClass}>
-                      Defect Reports
-                    </NavLink>
                     <NavLink to="/reports" className={linkClass}>
                       Reports
                     </NavLink>
