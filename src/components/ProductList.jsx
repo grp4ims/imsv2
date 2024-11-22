@@ -71,7 +71,6 @@ const ProductList = ({ product, userRole }) => {
   };
 
   const handleDeleteProduct = async () => {
-    window.location.reload();
     const confirmDelete = window.confirm(
       `Are you sure you want to delete Product ID ${Product_ID}?`
     );
