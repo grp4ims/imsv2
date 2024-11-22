@@ -32,7 +32,6 @@ const Login = () => {
         setIsAuthenticated(true);
         setUserRole(data.user.role);
         navigate("/home");
-        window.location.reload();
       } else {
         console.error("Login failed:", data.message);
         setError(data.message || "Invalid email or password");
@@ -82,7 +81,6 @@ const Login = () => {
               >
                 Password
               </label>
-              
             </div>
             <div className="mt-2">
               <input

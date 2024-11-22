@@ -22,10 +22,10 @@ import PurchaseOrdersPage from "./pages/PurchaseOrdersPage";
 import DefectReportsPage from "./pages/DefectReportsPage";
 
 const ProtectedRoute = ({ requiredRole, children }) => {
-  const { userRole, isAuthenticated } = useContext(UserContext);
+  const { userRole, isAuthenticated, isLoading } = useContext(UserContext);
 
-  if (isAuthenticated === null) {
-    return <div>Loading...</div>; 
+  if (isLoading) {
+    return <div>Loading...</div>; // Show loading state while token is verified
   }
 
   if (!isAuthenticated) {
@@ -33,7 +33,7 @@ const ProtectedRoute = ({ requiredRole, children }) => {
   }
 
   if (requiredRole && userRole !== requiredRole) {
-    return <Navigate to="/home" />; 
+    return <Navigate to="/home" />;
   }
 
   return children;
@@ -103,7 +103,6 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
-
             <Route
               path="/customer"
               element={
@@ -112,7 +111,7 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
-            <Route 
+            <Route
               path="/purchaseOrders"
               element={
                 <ProtectedRoute requiredRole="admin">
@@ -128,7 +127,6 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
-
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
