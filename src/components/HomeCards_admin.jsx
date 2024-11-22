@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Card from './Card'
 
-// changes made on 09/09 : to change from supplier to customer page
 const HomeCards_admin = () => {
   return (
     <section className="py-4">

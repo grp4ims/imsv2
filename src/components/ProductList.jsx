@@ -21,7 +21,6 @@ const ProductList = ({ product, userRole }) => {
     return <div>Error: Product data is missing</div>;
   }
 
-  //updated to reference the DB field instead of json file
   const {
     Product_ID,
     Product_Name,
@@ -32,18 +31,18 @@ const ProductList = ({ product, userRole }) => {
 
   const [quantity, setQuantity] = useState(1);
 
-  const [showStockAlert, setShowStockAlert] = useState(false); // State for stock alert modal
+  const [showStockAlert, setShowStockAlert] = useState(false); 
   const currentCartItem = carts.find((item) => item.Product_ID === Product_ID);
   const currentCartQuantity = currentCartItem ? currentCartItem.quantity : 0;
   const handleMinusQuantity = () => {
-    setQuantity((prev) => Math.max(prev - 1, 1)); // Prevents quantity from going below 1
+    setQuantity((prev) => Math.max(prev - 1, 1)); 
   };
 
   const handlePlusQuantity = () => {
     if (quantity + currentCartQuantity < Product_Qty) {
       setQuantity((prev) => prev + 1);
     } else {
-      setShowStockAlert(true); // Show modal if quantity exceeds stock
+      setShowStockAlert(true); 
     }
   };
   const handleAddToCart = () => {
@@ -60,7 +59,7 @@ const ProductList = ({ product, userRole }) => {
       setShowAddedMessage(true);
       setTimeout(() => setShowAddedMessage(false), 1500);
     } else {
-      setShowStockAlert(true); // Show modal if quantity exceeds stock
+      setShowStockAlert(true); 
     }
   };
 
@@ -96,6 +95,7 @@ const ProductList = ({ product, userRole }) => {
   };
 
   const handleUpdateSubmit = async () => {
+    window.location.reload();
     const formattedProduct = {
       name: updatedProduct.Product_Name,
       description: updatedProduct.Product_Description,
@@ -118,7 +118,7 @@ const ProductList = ({ product, userRole }) => {
 
       if (response.ok) {
         console.log(`Product with ID ${Product_ID} updated successfully.`);
-        setShowUpdateModal(false); // Close the modal after a successful update
+        setShowUpdateModal(false); 
       } else {
         console.error(
           `Failed to update product with ID ${Product_ID}.`,
@@ -183,12 +183,12 @@ const ProductList = ({ product, userRole }) => {
                 className="border h-10 w-20 text-center text-lg rounded-md"
                 value={quantity}
                 min="1"
-                max={Product_Qty} // Limit to available stock
+                max={Product_Qty} 
                 onChange={(e) => {
                   const inputQty = Math.max(
                     1,
                     Math.min(Product_Qty, Number(e.target.value))
-                  ); // Constrain within stock limits
+                  ); 
                   setQuantity(inputQty);
                 }}
               />
@@ -237,7 +237,6 @@ const ProductList = ({ product, userRole }) => {
         </div>
       )}
 
-      {/* Update Product Modal */}
       {showUpdateModal && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-96">

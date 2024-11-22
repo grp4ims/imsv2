@@ -6,7 +6,6 @@ module.exports = (db) => {
     router.post('/', async (req, res) => {
         const { email, password, role, firstName, lastName, contact, companyName } = req.body;
 
-        // Map frontend names to database column names
         const fname = firstName;
         const lname = lastName;
 

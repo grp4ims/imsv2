@@ -5,11 +5,9 @@ const Logout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Clear the token from localStorage
     localStorage.removeItem('token');
     console.log('User logged out');
 
-    // After logout, navigate to the LoginPage
     navigate('/login');
   }, [navigate]);
 
