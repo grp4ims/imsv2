@@ -5,8 +5,8 @@ const cors = require('cors');
 const app = express();
 const port = 3002;
 
+const { authenticateJWT, router: authRouter } = require('./auth_jwt');
 const products = require('./products')
-const auth_jwt = require('./auth_jwt')
 const login = require('./login')
 const register = require('./register')
 const customer = require('./customer')
@@ -35,11 +35,11 @@ app.use(cors(corsOptions));
 app.use(express.json()); 
 
 app.use('/products',products(db))
-app.use('/auth_jwt',auth_jwt)
+app.use('/auth_jwt',authRouter)
 app.use('/login',login(db))
 app.use('/register',register(db))
 app.use('/customer',customer(db))
-app.use('/reports',reports(db))
+app.use('/reports',authenticateJWT,reports(db));
 app.use('/orders', orders(db))
 
 app.use('/purchaseorders',purchaseorders(db))
