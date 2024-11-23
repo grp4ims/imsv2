@@ -393,15 +393,7 @@ const ReturnReports = () => {
       ) : (
         <>
           <ReportsIndividualProducts products={products} />
-          <div className="flex justify-center mt-1 pb-6">
-            <button
-              id="remove-this"
-              className="btn btn-accent"
-              onClick={printPDF}
-            >
-              Generate PDF Report
-            </button>
-          </div>
+
           <div className="divider divider-accent"></div>
         </>
       )}
