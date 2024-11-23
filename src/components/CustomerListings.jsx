@@ -17,8 +17,6 @@ const CustomerListings = () => {
       } catch (err) {
         console.error("Fetch error:", err);
         setError("Failed to load customers. Please try again later.");
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -31,7 +29,8 @@ const CustomerListings = () => {
       customer.Fname.toLowerCase().includes(query) ||
       customer.Lname.toLowerCase().includes(query) ||
       customer.Email.toLowerCase().includes(query) ||
-      (customer.Company_Name && customer.Company_Name.toLowerCase().includes(query))
+      (customer.Company_Name &&
+        customer.Company_Name.toLowerCase().includes(query))
     );
   });
 
@@ -41,13 +40,13 @@ const CustomerListings = () => {
         <h1 className="text-2xl font-bold mb-4">Customer Listings</h1>
 
         <div className="mb-6">
-        <input
-          type="text"
-          placeholder="Search by name, email, or company"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="p-2 border border-gray-300 rounded-md w-1/4"
-        />
+          <input
+            type="text"
+            placeholder="Search by name, email, or company"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="p-2 border border-gray-300 rounded-md w-1/4"
+          />
         </div>
 
         <div className="customer-listings grid grid-cols-1 lg:grid-cols-1 gap-6">

@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const AddProduct = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    cost: '',
-    quantity: '',
-    category: '',
+    name: "",
+    description: "",
+    cost: "",
+    quantity: "",
+    category: "",
   });
 
-  const [statusMessage, setStatusMessage] = useState('');
+  const [statusMessage, setStatusMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,38 +21,45 @@ const AddProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    window.location.reload();
+    // window.location.reload();
 
     try {
-      const response = await fetch('http://localhost:3002/products/add', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3002/products/add", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        setStatusMessage('Product added successfully!');
+        setStatusMessage("Product added successfully!");
         setFormData({
-          name: '',
-          description: '',
-          cost: '',
-          quantity: '',
-          category: '',
+          name: "",
+          description: "",
+          cost: "",
+          quantity: "",
+          category: "",
         });
+        const confirmAction = window.confirm(
+          "Product added successfully! Press ok to refresh the page."
+        );
+        if (!confirmAction) {
+          return;
+        } else {
+          window.location.reload();
+        }
       } else {
-        setStatusMessage('Failed to add product. Please try again.');
+        setStatusMessage("Failed to add product. Please try again.");
       }
     } catch (error) {
-      console.error('Error adding product:', error);
-      setStatusMessage('Error adding product. Please try again later.');
+      console.error("Error adding product:", error);
+      setStatusMessage("Error adding product. Please try again later.");
     }
   };
 
   return (
     <div className="w-full bg-white p-6 rounded-md shadow-md mb-10">
-  
       <form onSubmit={handleSubmit}>
         <div className="mb-2">
           <label className="block font-semibold">Product Name:</label>

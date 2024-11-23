@@ -31,18 +31,18 @@ const ProductList = ({ product, userRole }) => {
 
   const [quantity, setQuantity] = useState(1);
 
-  const [showStockAlert, setShowStockAlert] = useState(false); 
+  const [showStockAlert, setShowStockAlert] = useState(false);
   const currentCartItem = carts.find((item) => item.Product_ID === Product_ID);
   const currentCartQuantity = currentCartItem ? currentCartItem.quantity : 0;
   const handleMinusQuantity = () => {
-    setQuantity((prev) => Math.max(prev - 1, 1)); 
+    setQuantity((prev) => Math.max(prev - 1, 1));
   };
 
   const handlePlusQuantity = () => {
     if (quantity + currentCartQuantity < Product_Qty) {
       setQuantity((prev) => prev + 1);
     } else {
-      setShowStockAlert(true); 
+      setShowStockAlert(true);
     }
   };
   const handleAddToCart = () => {
@@ -59,7 +59,7 @@ const ProductList = ({ product, userRole }) => {
       setShowAddedMessage(true);
       setTimeout(() => setShowAddedMessage(false), 1500);
     } else {
-      setShowStockAlert(true); 
+      setShowStockAlert(true);
     }
   };
 
@@ -86,6 +86,7 @@ const ProductList = ({ product, userRole }) => {
 
       if (response.ok) {
         console.log(`Product with ID ${Product_ID} deleted successfully.`);
+        window.location.reload();
       } else {
         console.error(`Failed to delete product with ID ${Product_ID}.`);
       }
@@ -95,7 +96,7 @@ const ProductList = ({ product, userRole }) => {
   };
 
   const handleUpdateSubmit = async () => {
-    window.location.reload();
+    // window.location.reload();
     const formattedProduct = {
       name: updatedProduct.Product_Name,
       description: updatedProduct.Product_Description,
@@ -118,7 +119,8 @@ const ProductList = ({ product, userRole }) => {
 
       if (response.ok) {
         console.log(`Product with ID ${Product_ID} updated successfully.`);
-        setShowUpdateModal(false); 
+        setShowUpdateModal(false);
+        window.location.reload();
       } else {
         console.error(
           `Failed to update product with ID ${Product_ID}.`,
@@ -183,12 +185,12 @@ const ProductList = ({ product, userRole }) => {
                 className="border h-10 w-20 text-center text-lg rounded-md"
                 value={quantity}
                 min="1"
-                max={Product_Qty} 
+                max={Product_Qty}
                 onChange={(e) => {
                   const inputQty = Math.max(
                     1,
                     Math.min(Product_Qty, Number(e.target.value))
-                  ); 
+                  );
                   setQuantity(inputQty);
                 }}
               />

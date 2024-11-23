@@ -43,7 +43,7 @@ const CustomerList = ({ customer, customers, setCustomers }) => {
   };
 
   const handleUpdateSubmit = async () => {
-    window.location.reload();
+    // window.location.reload();
     const formattedCustomer = {
       Fname: updatedCustomer.Fname,
       Lname: updatedCustomer.Lname,
@@ -66,9 +66,10 @@ const CustomerList = ({ customer, customers, setCustomers }) => {
 
       if (response.ok) {
         console.log(`Customer with ID ${UserID} updated successfully.`);
-        setShowUpdateModal(false); 
-        
+        setShowUpdateModal(false);
+
         window.alert("Customer updated successfully!");
+        window.location.reload();
       } else {
         console.error(
           `Failed to update customer with ID ${UserID}.`,
@@ -94,10 +95,16 @@ const CustomerList = ({ customer, customers, setCustomers }) => {
         <h3 className="text-xl font-semibold text-gray-800 mb-2">
           {Fname} {Lname}
         </h3>
-        <p className="text-gray-600"><strong>Email:</strong> {Email}</p>
-        <p className="text-gray-600"><strong>Contact:</strong> {Contact}</p>
+        <p className="text-gray-600">
+          <strong>Email:</strong> {Email}
+        </p>
+        <p className="text-gray-600">
+          <strong>Contact:</strong> {Contact}
+        </p>
         {Company_Name && (
-          <p className="text-gray-600"><strong>Company:</strong> {Company_Name}</p>
+          <p className="text-gray-600">
+            <strong>Company:</strong> {Company_Name}
+          </p>
         )}
       </div>
 
